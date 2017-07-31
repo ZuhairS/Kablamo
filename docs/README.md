@@ -12,11 +12,10 @@ While playing Kablamo, players will be able to:
 - Start, pause, restart the current level as well as choose different levels. (Bonus: A few game modes)
 - Use arrow keys to move and use mouse to control the force and direction of their character's launch.
 - Defeat enemies by hitting them into walls/enemies.
-- Be able to grab onto walls/enemies and launch again.
 - Have enemies launch themselves onto the player to damage them.
 - Have damage threshold after which the player loses.
 - Have some progression with more enemies. (Bonus: Different types)
-- Simple Sound effects
+- (Priority Bonus) Be able to grab onto walls/enemies and launch again.
 
 ###### Kablamo will also have a production README.
 
@@ -36,7 +35,7 @@ Kablamo is intended to be built on the following technologies:
 - Vanilla JavaScript for game structure and logic.
 - jQuery for DOM Manipulation.
 - Easel.js with HTML5 Canvas for rendering.
-- Physics.js for physical reactions to impact.
+- matter.js for physical reactions to impact.
 
 ## Implementation Timeline
 
