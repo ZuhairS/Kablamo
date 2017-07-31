@@ -39,7 +39,7 @@ Kablamo is intended to be built on the following technologies:
 
 ## Implementation Timeline
 
-**Day 1**: Learn the fundamentals of Easel.js and Physics.js in order to get a better understanding of future work.
+**Day 1**: Learn the fundamentals of Easel.js and matter.js in order to get a better understanding of future work.
 
 **Day 2**: Create basic player character, basic controls and try to implement controlled physical launching. Have launched player pass on momentum onto hit object.
 
