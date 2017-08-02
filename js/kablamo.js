@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  Events.on(mouseConstraint, "mousedown", event => {
+  Events.on(mouseConstraint, "mouseup", event => {
     let diffx;
     let diffy = -Math.abs(mouse.position.y - body.position.y);
     if (body.position.x > mouse.position.x) {
