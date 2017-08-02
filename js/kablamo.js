@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var engine = Engine.create(),
     world = engine.world;
 
-  var body = Bodies.circle(500, 200, 50);
-  var enemy = Bodies.circle(1000, 200, 50);
+  var body = Bodies.circle(500, 200, 50, { restitution: 0.6 });
+  var enemy = Bodies.circle(1000, 200, 50, { restitution: 0.6 });
   var ground = Bodies.rectangle(700, 610, 1200, 20, { isStatic: true });
   var leftWall = Bodies.rectangle(120, 350, 20, 500, { isStatic: true });
   var rightWall = Bodies.rectangle(1280, 350, 20, 500, { isStatic: true });
@@ -94,15 +94,47 @@ document.addEventListener("DOMContentLoaded", function() {
     if (body.position.x > mouse.position.x) {
       diffx = mouse.position.x - body.position.x;
       Body.applyForce(body, body.position, {
-        x: Math.max(diffx * 0.002, -0.15),
-        y: Math.max(diffy * 0.002, -0.2)
+        x: Math.max(diffx * 0.002, -0.3),
+        y: Math.max(diffy * 0.002, -0.3)
       });
     } else if (body.position.x < mouse.position.x) {
       diffx = mouse.position.x - body.position.x;
       Body.applyForce(body, body.position, {
-        x: Math.min(diffx * 0.002, 0.15),
-        y: Math.max(diffy * 0.002, -0.2)
+        x: Math.min(diffx * 0.002, 0.3),
+        y: Math.max(diffy * 0.002, -0.3)
       });
+    }
+  });
+
+  Events.on(render, "afterRender", () => {
+    if (enemy.position.x > body.position.x) {
+      Body.setAngularVelocity(enemy, -0.1);
+    } else if (enemy.position.x < body.position.x) {
+      Body.setAngularVelocity(enemy, 0.1);
+    }
+
+    if (enemy.position.y > 550) {
+      let diffx;
+      let diffy = -Math.abs(body.position.y - enemy.position.y);
+      if (
+        enemy.position.x > body.position.x &&
+        body.position.y < enemy.position.y - 30
+      ) {
+        diffx = body.position.x - enemy.position.x;
+        Body.applyForce(enemy, enemy.position, {
+          x: Math.max(diffx * 0.002, -0.3),
+          y: Math.max(diffy * 0.002, -0.3)
+        });
+      } else if (
+        enemy.position.x < body.position.x &&
+        body.position.y < enemy.position.y - 30
+      ) {
+        diffx = body.position.x - enemy.position.x;
+        Body.applyForce(enemy, enemy.position, {
+          x: Math.min(diffx * 0.002, 0.3),
+          y: Math.max(diffy * 0.002, -0.3)
+        });
+      }
     }
   });
 });
