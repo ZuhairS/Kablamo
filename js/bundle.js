@@ -87,15 +87,15 @@ document.addEventListener("DOMContentLoaded", function() {
   var engine = Engine.create(),
     world = engine.world;
 
-  // create two boxes and a ground
   var body = Bodies.circle(400, 200, 40);
+  var enemy = Bodies.circle(400, 200, 40);
   var ground = Bodies.rectangle(600, 610, 1000, 20, { isStatic: true });
   var leftWall = Bodies.rectangle(120, 350, 20, 500, { isStatic: true });
   var rightWall = Bodies.rectangle(1080, 350, 20, 500, { isStatic: true });
   var roof = Bodies.rectangle(600, 100, 1000, 20, { isStatic: true });
 
   // add all of the bodies to the world
-  World.add(world, [body, ground, leftWall, rightWall, roof]);
+  World.add(world, [body, enemy, ground, leftWall, rightWall, roof]);
 
   // run the engine
   Engine.run(engine);
@@ -125,21 +125,41 @@ document.addEventListener("DOMContentLoaded", function() {
     mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
-        stiffness: 0.6,
-        length: 0,
-        angularStiffness: 0,
+        stiffness: 0,
         render: {
-          visible: true
+          hasBounds: true,
+          visible: false
         }
       }
     });
 
   World.add(world, mouseConstraint);
 
+  console.log(mouseConstraint);
+  console.log(body);
+  console.log(render);
+
   // keep the mouse in sync with rendering
   render.mouse = mouse;
 
-  mouseConstraint.body = body;
+  Events.on(mouseConstraint, "mousemove", event => {
+    if (body.position.x > mouse.position.x) {
+      Body.setAngularVelocity(body, -0.1);
+    } else if (body.position.x < mouse.position.x) {
+      Body.setAngularVelocity(body, 0.1);
+    }
+  });
+
+  Events.on(mouseConstraint, "mousedown", event => {
+    console.log(mouse.position);
+    let diffx = mouse.position.x - body.position.x;
+    let diffy = -Math.abs(mouse.position.y - body.position.y);
+
+    Body.applyForce(body, body.position, {
+      x: diffx * 0.002,
+      y: diffy * 0.002
+    });
+  });
 });
 
 
