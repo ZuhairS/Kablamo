@@ -68,7 +68,7 @@
 /***/ (function(module, exports) {
 
 document.addEventListener("DOMContentLoaded", function() {
-  var Engine = Matter.Engine,
+  let Engine = Matter.Engine,
     Events = Matter.Events,
     Render = Matter.Render,
     Runner = Matter.Runner,
@@ -84,18 +84,18 @@ document.addEventListener("DOMContentLoaded", function() {
     Bounds = Matter.Bounds,
     Vector = Matter.Vector;
 
-  var canvas = document.getElementById("canvas");
+  let canvas = document.getElementById("canvas");
 
   // create an engine
-  var engine = Engine.create(),
+  let engine = Engine.create(),
     world = engine.world;
 
-  var body = Bodies.circle(500, 200, 50, { restitution: 0.6 });
-  var enemy = Bodies.circle(1000, 200, 50, { restitution: 0.6 });
-  var ground = Bodies.rectangle(700, 610, 1200, 20, { isStatic: true });
-  var leftWall = Bodies.rectangle(120, 350, 20, 500, { isStatic: true });
-  var rightWall = Bodies.rectangle(1280, 350, 20, 500, { isStatic: true });
-  var roof = Bodies.rectangle(700, 100, 1200, 20, { isStatic: true });
+  let body = Bodies.circle(500, 200, 50, { restitution: 0.6 });
+  let enemy = Bodies.circle(1000, 200, 50, { restitution: 0.6 });
+  let ground = Bodies.rectangle(700, 610, 1200, 20, { isStatic: true });
+  let leftWall = Bodies.rectangle(120, 350, 20, 500, { isStatic: true });
+  let rightWall = Bodies.rectangle(1280, 350, 20, 500, { isStatic: true });
+  let roof = Bodies.rectangle(700, 100, 1200, 20, { isStatic: true });
 
   // add all of the bodies to the world
   World.add(world, [body, enemy, ground, leftWall, rightWall, roof]);
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // run the engine
   Engine.run(engine);
 
-  var render = Render.create({
+  let render = Render.create({
     element: document.body,
     canvas: canvas,
     engine: engine,
@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
       showAngleIndicator: true
     }
   });
+  console.log(render.options);
 
   // // Resize canvas view based on screen.
   // window.addEventListener("resize", function() {
@@ -129,11 +130,11 @@ document.addEventListener("DOMContentLoaded", function() {
   Render.run(render);
 
   // create runner
-  var runner = Runner.create();
+  let runner = Runner.create();
   Runner.run(runner, engine);
 
   // add mouse control and make the mouse revolute
-  var mouse = Mouse.create(render.canvas),
+  let mouse = Mouse.create(render.canvas),
     mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
@@ -157,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  Events.on(mouseConstraint, "mouseup", event => {
+  Events.on(mouseConstraint, "mousedown", event => {
     let diffx;
     let diffy = -Math.abs(mouse.position.y - body.position.y);
     if (body.position.x > mouse.position.x) {
