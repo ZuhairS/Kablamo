@@ -66,7 +66,6 @@ export default function Kablamo(mode) {
   Events.on(mouseConstraint, "mousedown", event => {
     let diffx;
     let diffy = -Math.abs(mouse.position.y - player.position.y);
-    console.log(diffy);
     if (player.position.x > mouse.position.x && diffy < -30) {
       diffx = mouse.position.x - player.position.x;
       Body.applyForce(player, player.position, {
