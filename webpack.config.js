@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './js/kablamo.js',
+  entry: "./js/game.js",
   output: {
-    filename: './js/bundle.js'
+    filename: "./js/bundle.js"
   },
-  devtool: 'source-map',
+  devtool: "source-map"
 };
