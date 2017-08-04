@@ -44,7 +44,7 @@ Kablamo is intended to be built on the following technologies:
 ## Bonus Features
 
 - Allow camera to zoom and stick to player in order to allow larger levels.
-- Allow enhanced launching on specific occasions.
+- Allow enhanced slowmo launching on specific occasions.
 - Add sound effects and music to game.
 - Add Survival mode.
 - Add enemy types.

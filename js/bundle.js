@@ -129,8 +129,8 @@ function Kablamo(mode) {
       showShadows: true,
       // showCollisions: true,
       pixelRatio: "auto",
-      hasBounds: true,
-      showAngleIndicator: true
+      hasBounds: true
+      // showAngleIndicator: true
     }
   });
 
@@ -161,6 +161,9 @@ function Kablamo(mode) {
 
   World.add(world, mouseConstraint);
 
+  // Variables
+  const minForce = 0.3;
+
   // keep the mouse in sync with rendering
   render.mouse = mouse;
 
@@ -178,14 +181,14 @@ function Kablamo(mode) {
     if (player.position.x > mouse.position.x && diffy < -30) {
       diffx = mouse.position.x - player.position.x;
       Body.applyForce(player, player.position, {
-        x: Math.max(diffx * 0.002, -0.3),
-        y: Math.max(diffy * 0.002, -0.3)
+        x: Math.max(diffx * 0.002, -minForce),
+        y: Math.max(diffy * 0.002, -minForce)
       });
     } else if (player.position.x < mouse.position.x && diffy < -30) {
       diffx = mouse.position.x - player.position.x;
       Body.applyForce(player, player.position, {
-        x: Math.min(diffx * 0.002, 0.3),
-        y: Math.max(diffy * 0.002, -0.3)
+        x: Math.min(diffx * 0.002, minForce),
+        y: Math.max(diffy * 0.002, -minForce)
       });
     }
   });
@@ -198,6 +201,7 @@ function Kablamo(mode) {
       Body.setAngularVelocity(enemy, 0.1);
     }
 
+    //Only allow jumping within bounds
     if (
       enemy.position.y > 550 &&
       enemy.position.x > 80 &&
@@ -211,8 +215,8 @@ function Kablamo(mode) {
       ) {
         diffx = player.position.x - enemy.position.x;
         Body.applyForce(enemy, enemy.position, {
-          x: Math.max(diffx * 0.002, -0.3),
-          y: Math.max(diffy * 0.002, -0.3)
+          x: Math.max(diffx * 0.002, -minForce),
+          y: Math.max(diffy * 0.002, -minForce)
         });
       } else if (
         enemy.position.x < player.position.x &&
@@ -220,8 +224,8 @@ function Kablamo(mode) {
       ) {
         diffx = player.position.x - enemy.position.x;
         Body.applyForce(enemy, enemy.position, {
-          x: Math.min(diffx * 0.002, 0.3),
-          y: Math.max(diffy * 0.002, -0.3)
+          x: Math.min(diffx * 0.002, minForce),
+          y: Math.max(diffy * 0.002, -minForce)
         });
       }
     }
