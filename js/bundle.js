@@ -175,13 +175,14 @@ function Kablamo(mode) {
   Events.on(mouseConstraint, "mousedown", event => {
     let diffx;
     let diffy = -Math.abs(mouse.position.y - player.position.y);
-    if (player.position.x > mouse.position.x) {
+    console.log(diffy);
+    if (player.position.x > mouse.position.x && diffy < -30) {
       diffx = mouse.position.x - player.position.x;
       Body.applyForce(player, player.position, {
         x: Math.max(diffx * 0.002, -0.3),
         y: Math.max(diffy * 0.002, -0.3)
       });
-    } else if (player.position.x < mouse.position.x) {
+    } else if (player.position.x < mouse.position.x && diffy < -30) {
       diffx = mouse.position.x - player.position.x;
       Body.applyForce(player, player.position, {
         x: Math.min(diffx * 0.002, 0.3),
