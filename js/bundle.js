@@ -76,12 +76,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let practice = document.getElementById("practice-button");
   let level1 = document.getElementById("level1-button");
   let header = document.getElementById("header");
+  let instructions = document.getElementById("instructions");
 
   practice.addEventListener("click", () => {
     World.clear(engine.world);
     practice.className += " hidden";
     level1.className += " hidden";
     header.className += " hidden";
+    instructions.className += " hidden";
     __WEBPACK_IMPORTED_MODULE_0__kablamo_js__["a" /* default */]("practice");
   });
 
@@ -90,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     practice.className += " hidden";
     level1.className += " hidden";
     header.className += " hidden";
+    instructions.className += " hidden";
     __WEBPACK_IMPORTED_MODULE_0__kablamo_js__["a" /* default */]("level1");
   });
 });
@@ -184,6 +187,7 @@ function Kablamo(mode) {
     }
   });
 
+  // Enemy AI
   Events.on(render, "afterRender", () => {
     if (enemy.position.x > player.position.x) {
       Body.setAngularVelocity(enemy, -0.1);

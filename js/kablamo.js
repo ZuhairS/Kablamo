@@ -78,6 +78,7 @@ export default function Kablamo(mode) {
     }
   });
 
+  // Enemy AI
   Events.on(render, "afterRender", () => {
     if (enemy.position.x > player.position.x) {
       Body.setAngularVelocity(enemy, -0.1);
