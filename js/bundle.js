@@ -152,7 +152,10 @@ function Kablamo(mode) {
     mouseConstraint = MouseConstraint.create(engine, {
       mouse: mouse,
       constraint: {
-        stiffness: 0
+        stiffness: 0,
+        render: {
+          visible: false
+        }
       }
     });
 
@@ -195,7 +198,11 @@ function Kablamo(mode) {
       Body.setAngularVelocity(enemy, 0.1);
     }
 
-    if (enemy.position.y > 550) {
+    if (
+      enemy.position.y > 550 &&
+      enemy.position.x > 80 &&
+      enemy.position.x < 1360
+    ) {
       let diffx;
       let diffy = -Math.abs(player.position.y - enemy.position.y);
       if (

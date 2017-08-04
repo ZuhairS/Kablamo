@@ -18,7 +18,7 @@ header {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 360px;
+  top: 400px;
   left: 660px;
   font-size: 20px;
   text-align: center;
@@ -27,15 +27,21 @@ header {
 #practice-button,
 #level1-button {
   padding: 10px;
-  border: 1px solid black;
+  border: 1px solid darkgrey;
   border-radius: 20px;
   margin: 10px;
   background-color: lightgrey;
   cursor: pointer;
 }
 
+#practice-button:hover,
+#level1-button:hover {
+  background-color: darkgrey;
+}
+
 aside {
   position: fixed;
+  text-align: center;
   top: 310px;
   left: 500px;
 }
