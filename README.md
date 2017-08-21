@@ -17,7 +17,7 @@ Have fun and [Go Kablamo!](https://zuhairs.github.io/Kablamo/)
 
 ## Notable challenges:
 
-#### Chase the mouse
+### Chase the mouse
 
 I know I wanted to have a simple control that only required the intuitive use of a mouse to play. Code wise it involved checking the position of the mouse and the player ball and then trying to close that gap.
 
@@ -41,9 +41,9 @@ Events.on(render, "afterRender", event => {
 });
 ```
 
-There are still some kinks left to work out. The physical nature of the engine means the ball will always overshoot the mouse and start oscillation. It isn't particularly irksome currently, but having accurate controls can allow me to implement some smarter difficulty later on.
+There are still some kinks left to work out. The physical nature of the engine means the ball will always overshoot the mouse and start oscillating. It isn't particularly irksome currently, but having accurate controls can allow me to implement some smarter difficulty later on.
 
-#### Super AI
+### Super AI
 
 The AI was _super_ fun to work with. Here are the simple decisions the AI will make,
 
@@ -58,14 +58,14 @@ Ouch...
 
 I ended up giving it bounds outside of which it should stop dashing.
 
-I may bring it back as a bonus level.
+...I may bring it back as a bonus level.
 
 ## Future work:
 
-There is still a lot more work to be done. Optimizations, features, etc, but here are some specific features that I'd like to implement:
+There is still a lot more work to be done. Optimizations, levels, etc, but here are some specific features that I'd like to implement:
 
 - Allow camera to follow the player in order to allow larger levels.
 - Allow enhanced slowmo launching on specific occasions.
 - Add sound effects and music to game.
-- Add Survival mode.
+- Add survival mode.
 - Add enemy types.
