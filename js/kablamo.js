@@ -6,6 +6,7 @@ export default function Kablamo(mode) {
   let player = initializePlayer(mode);
   let enemy = initializeEnemy(mode);
   let level = initializeLevel(mode);
+  let gameState = true;
 
   let canvas = document.getElementById("canvas");
 
@@ -18,22 +19,12 @@ export default function Kablamo(mode) {
       width: 1440,
       height: 798,
       showShadows: true,
-      // showCollisions: true,
       pixelRatio: "auto",
       hasBounds: true
-      // showAngleIndicator: true
     }
   });
 
-  // // Resize canvas view based on screen.
-  // window.addEventListener("resize", function() {
-  //   console.log(render);
-  //   canvas.width = window.innerWidth;
-  //   canvas.height = window.innerHeight;
-  // });
-
   Render.run(render);
-
   // create runner
   let runner = Runner.create();
   Runner.run(runner, engine);
@@ -58,11 +49,37 @@ export default function Kablamo(mode) {
   // keep the mouse in sync with rendering
   render.mouse = mouse;
 
+  // Allow space to refresh level
+  // window.addEventListener("keypress", function (event) {
+  //   const SPACEBAR = 32;
+  //   if (event.which === SPACEBAR) {
+  //     World.clear(engine.world);
+  //     Engine.clear(engine);
+  //     Runner.stop(runner);
+  //     Kablamo("level1");
+  //     event.preventDefault();
+  //   }
+  // });
+
   Events.on(render, "afterRender", event => {
     if (player.position.x > mouse.position.x) {
       Body.setAngularVelocity(player, -0.1);
     } else if (player.position.x < mouse.position.x) {
       Body.setAngularVelocity(player, 0.1);
+    }
+
+    // Reset if a ball falls off
+    if (
+      (enemy.position.y > 600 ||
+      player.position.y > 600) && gameState
+    ) {
+      gameState = false;
+      setTimeout(() => {
+        Engine.clear(engine);
+        Runner.stop(runner);
+        World.clear(engine.world);
+        Kablamo("level1");
+      }, 2000);
     }
   });
 
@@ -92,7 +109,7 @@ export default function Kablamo(mode) {
       Body.setAngularVelocity(enemy, 0.1);
     }
 
-    //Only allow jumping within bounds
+    // Only allow jumping within bounds
     if (
       enemy.position.y > 550 &&
       enemy.position.x > 80 &&
@@ -119,6 +136,8 @@ export default function Kablamo(mode) {
           y: Math.max(diffy * 0.002, -minForce)
         });
       }
+    } else if (player.position.y > 560) {
+      Body.setAngularVelocity(enemy, 0);
     }
   });
 }
